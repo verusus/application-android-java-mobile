@@ -11,7 +11,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btCall, btCamera, btCalc;
+    Button btCall, btCamera, btCalc, btConnect;
     Intent intent;
 
     @Override
@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         btCall = findViewById(R.id.appelBtn);
         btCamera = findViewById(R.id.photoBtn);
         btCalc = findViewById(R.id.calcBtn);
+        btConnect = findViewById(R.id.connectBtn);
 
         btCall.setOnClickListener(view -> {
             intent = new Intent(MainActivity.this, CallManager.class);
@@ -35,6 +36,11 @@ public class MainActivity extends AppCompatActivity {
 
         btCalc.setOnClickListener(view -> {
             intent = new Intent(MainActivity.this, CalcManager.class);
+            startActivity(intent);
+        });
+
+        btConnect.setOnClickListener(view -> {
+            intent = new Intent(MainActivity.this, ConnectManager.class);
             startActivity(intent);
         });
 
