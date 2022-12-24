@@ -35,16 +35,13 @@ public class CallManager extends AppCompatActivity {
 
         }
 
-        callbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        callbtn.setOnClickListener(v -> {
 
-                String phoneno = phoneNo.getText().toString();
-                Intent i = new Intent(Intent.ACTION_CALL);
-                i.setData(Uri.parse("tel:" + phoneno));
-                startActivity(i);
+            String phoneno = phoneNo.getText().toString();
+            Intent i = new Intent(Intent.ACTION_CALL);
+            i.setData(Uri.parse("tel:" + phoneno));
+            startActivity(i);
 
-            }
         });
 
     }
