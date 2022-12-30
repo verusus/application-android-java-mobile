@@ -3,10 +3,12 @@ package com.example.intent1;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.intent1.SQLiteDAO.SQLiteHelper;
@@ -15,6 +17,8 @@ public class RegistrationActivity extends AppCompatActivity {
 
     EditText username, password, passwordValidation;
     Button register;
+    TextView signUp;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +26,7 @@ public class RegistrationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registration);
 
         register = findViewById(R.id.registerButton);
+        signUp = findViewById(R.id.signupText);
 
         register.setOnClickListener(view -> {
             // if the button clicked then start grabbing the following data
@@ -36,9 +41,11 @@ public class RegistrationActivity extends AppCompatActivity {
                 ContentValues contentValues = new ContentValues();
                 contentValues.put("username", username.getText().toString());
                 contentValues.put("pass", password.getText().toString());
-                db.insert("user", null, contentValues);
-
-                Toast.makeText(RegistrationActivity.this, "You are registered successfully!", Toast.LENGTH_SHORT).show();
+                long r = db.insert("user", null, contentValues);
+                if (r!=-1)
+                    Toast.makeText(RegistrationActivity.this, "You are registered successfully!", Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(RegistrationActivity.this, "There was a problem!", Toast.LENGTH_SHORT).show();
 
             }else {
                 Toast.makeText(RegistrationActivity.this, "The passwords doesn't match!", Toast.LENGTH_SHORT).show();
@@ -46,6 +53,10 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
 
+        signUp.setOnClickListener(view -> {
+            intent = new Intent(RegistrationActivity.this, ConnectManager.class);
+            startActivity(intent);
+        });
 
     }
 }

@@ -40,16 +40,16 @@ public class ConnectManager extends AppCompatActivity {
             SQLiteDatabase db = sqLiteHelper.getReadableDatabase();
             String columns[] = {"username", "pass"};
             Cursor cursor = db.query("user", columns, null, null, null, null, null);
-            cursor.moveToFirst();
-            boolean isLogged = false;
-            while (!cursor.isAfterLast()) {
-                if (username.getText().toString().equals(cursor.getString(1))) {
-                    if (password.getText().toString().equals(cursor.getString(2))) {
-                        isLogged = true;
+//            cursor.moveToFirst();
 
-                    } else {
-                        cursor.moveToNext();
+            boolean isLogged = false;
+            while (cursor.moveToNext()) {
+                if (username.getText().toString().equals(cursor.getString(0))) {
+                    if (password.getText().toString().equals(cursor.getString(1))){
+                        isLogged = true;
+                        break;
                     }
+
                 }
             }
             if (isLogged)
